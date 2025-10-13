@@ -27,6 +27,12 @@ public:
         head = nullptr;
     }
 
+void PushFront(TMovie* m) const
+  {
+        auto* n = new TMovieNode(m);
+        n->SetNextNode(head->GetNextNode());
+        head->SetNextNode(n);
+  }
 };
 
 
