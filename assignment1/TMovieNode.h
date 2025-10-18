@@ -3,22 +3,17 @@
 
 #include "TMovie.h"
 
-
-
-using namespace std;
-
-
-
 class TMovieNode {
 private:
 
     TMovie* movie;
     TMovieNode* nextNode;
+    TMovieNode* prevNode;
 
 public:
 
     // constructor
-    explicit TMovieNode(TMovie* moviePointer) : movie(moviePointer), nextNode(nullptr) {}
+    explicit TMovieNode(TMovie* moviePointer) : movie(moviePointer), nextNode(nullptr), prevNode(nullptr) {}
 
     // destructor
     ~TMovieNode()
@@ -27,8 +22,8 @@ public:
         movie = nullptr;
     }
 
-    // getter and setter for nextNode pointer
-    TMovieNode* GetNextNode()
+    // getters and setters for next and previous nodes
+    [[nodiscard]] TMovieNode* GetNextNode() const
     {
         return nextNode;
     }
@@ -38,6 +33,18 @@ public:
         nextNode = next;
     }
 
+    [[nodiscard]] TMovieNode* GetPrevNode() const
+    {
+        return prevNode;
+    }
+    void SetPrevNode(TMovieNode* prev)
+    {
+        prevNode = prev;
+    }
+    [[nodiscard]] TMovie* GetMovie() const
+    {
+        return movie;
+    }
 };
 
 

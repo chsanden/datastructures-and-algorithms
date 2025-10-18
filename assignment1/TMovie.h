@@ -4,13 +4,8 @@
 #define IKT203_TMOVIE_H
 
 
-#include <wsman.h>
 #include <string>
 #include <utility>
-
-// I know there's debate on the use of namespace, but honestly
-// I cba to write std:: before everything...
-using namespace std;
 
 enum EMovieGenreType{
     ACTION = 1 << 0,
@@ -24,23 +19,23 @@ enum EMovieGenreType{
 class TMovie
         {
         private:
-            string title;
-            string director;
+            std::string title;
+            std::string director;
             int year;
             EMovieGenreType genre;
             float score;
 
         public:
 
-            TMovie(string T, string D, int Y, EMovieGenreType G, float S) :
+            TMovie(std::string T, std::string D, int Y, EMovieGenreType G, float S) :
             title(std::move(T)), director(std::move(D)), year(Y), genre(G), score(S) {}
 
             // Simple getters - using [[nodiscard]] to give warning if value is not used
-            [[nodiscard]] string GetTitle() const
+            [[nodiscard]] std::string GetTitle() const
             {
                 return title;
             }
-            [[nodiscard]] string GetDirector() const
+            [[nodiscard]] std::string GetDirector() const
             {
                 return director;
             }

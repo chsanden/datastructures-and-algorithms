@@ -4,16 +4,13 @@
 #include "TMovie.h"
 #include "TMovieNode.h"
 
-
-
-using namespace std;
-
 class TMovieList {
 private:
     TMovieNode* head;
+    TMovieNode* tail;
 
 public:
-    TMovieList() : head(new TMovieNode(nullptr)) {}
+    TMovieList() : head(new TMovieNode(nullptr)), tail(head) {}
 
     ~TMovieList()
     {
@@ -25,14 +22,15 @@ public:
             current = next;
         }
         head = nullptr;
+        tail = nullptr;
     }
+    void Append(TMovie* m);
+    void Prepend(TMovie* m);
 
-void PushFront(TMovie* m) const
-  {
-        auto* n = new TMovieNode(m);
-        n->SetNextNode(head->GetNextNode());
-        head->SetNextNode(n);
-  }
+    TMovieNode *NavigateToNode(int index);
+
+    TMovie* GetAtIndex(int index);
+    void Remove(int index);
 };
 
 
