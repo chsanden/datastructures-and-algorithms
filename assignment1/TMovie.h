@@ -2,8 +2,6 @@
 
 #ifndef IKT203_TMOVIE_H
 #define IKT203_TMOVIE_H
-
-
 #include <string>
 #include <utility>
 

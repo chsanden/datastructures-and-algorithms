@@ -6,6 +6,7 @@ using namespace std;
 
 void TMovieList::Append(TMovie* m)
 {
+    // Time complexity O(1) with using tail and prev nodes
     auto* newNode = new TMovieNode(m);
     newNode->SetPrevNode(tail);
     tail->SetNextNode(newNode);
@@ -24,13 +25,12 @@ void TMovieList::Prepend(TMovie* m)
     if (old)
         old->SetPrevNode(newNode);
 
-
     cout << "Prepended '" << m->GetTitle() << "' into list of movies" <<endl;
     if (tail == head)
         tail = newNode;
 }
 
-TMovieNode* TMovieList::NavigateToNode(int index)
+TMovieNode* TMovieList::NavigateToNode(const int index) const
 {
     // Negativ index finnes ikke -> ugyldig
     if (index < 0)
@@ -51,13 +51,13 @@ TMovieNode* TMovieList::NavigateToNode(int index)
 
 }
 
-TMovie* TMovieList::GetAtIndex(int index)
+TMovie* TMovieList::GetAtIndex(const int index) const
 {
     auto* node = NavigateToNode(index);
     return node ? node->GetMovie() : nullptr;
 }
 
-void TMovieList::Remove(int index)
+void TMovieList::Remove(const int index)
 {
     auto* node = NavigateToNode(index);
     if (node == nullptr)
@@ -78,4 +78,18 @@ void TMovieList::Remove(int index)
         tail = head;
 
     delete node;
+}
+
+TMovie *TMovieList::SearchFor(const FCheckMovie check_movie, void *criteria) const
+{
+    auto* node = head->GetNextNode();
+    while (node != nullptr)
+    {
+        if (check_movie(node->GetMovie(), criteria))
+        {
+            return node->GetMovie();
+        }
+        node = node->GetNextNode();
+    }
+    return nullptr;
 }

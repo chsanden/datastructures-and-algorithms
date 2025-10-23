@@ -4,6 +4,9 @@
 #include "TMovie.h"
 #include "TMovieNode.h"
 
+// typedef to increase flexibility and reduce code recycling
+typedef bool (*FCheckMovie)(TMovie* movie, void* criteria);
+
 class TMovieList {
 private:
     TMovieNode* head;
@@ -26,10 +29,11 @@ public:
     }
     void Append(TMovie* m);
     void Prepend(TMovie* m);
+    TMovie* SearchFor(FCheckMovie check_movie, void* criteria) const;
 
-    TMovieNode *NavigateToNode(int index);
+    [[nodiscard]] TMovieNode *NavigateToNode(int index) const;
 
-    TMovie* GetAtIndex(int index);
+    [[nodiscard]] TMovie* GetAtIndex(int index) const;
     void Remove(int index);
 };
 
