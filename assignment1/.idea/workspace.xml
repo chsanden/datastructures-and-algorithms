@@ -29,15 +29,6 @@
   <component name="ChangeListManager">
     <list default="true" id="e3758ede-1321-4b2e-94dd-da87753a03f6" name="Changes" comment="Finished">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TMovie.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TMovie.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TMovieList.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TMovieList.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TMovieNode.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TMovieNode.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-Debug-log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-Debug-log.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,11 +82,6 @@
   }
 }</component>
   <component name="RunManager" selected="C/C++ File.main.cpp">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="assignment1" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="assignment1" TARGET_NAME="assignment1" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="assignment1" RUN_TARGET_NAME="assignment1">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -108,8 +94,8 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="C/C++ File.main.cpp" />
       <item itemvalue="CMake Application.assignment1" />
+      <item itemvalue="C/C++ File.main.cpp" />
     </list>
   </component>
   <component name="TaskManager">
@@ -123,6 +109,7 @@
       <workItem from="1760788441262" duration="11460000" />
       <workItem from="1760967500921" duration="5495000" />
       <workItem from="1761213959983" duration="4210000" />
+      <workItem from="1761302251197" duration="113000" />
     </task>
     <task id="LOCAL-00001" summary="Finished">
       <option name="closed" value="true" />
