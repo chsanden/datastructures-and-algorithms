@@ -1,3 +1,0 @@
-C:/Users/csand/IKT203/Exam/part1/build/CMakeFiles/Assignment-01.dir
-C:/Users/csand/IKT203/Exam/part1/build/CMakeFiles/edit_cache.dir
-C:/Users/csand/IKT203/Exam/part1/build/CMakeFiles/rebuild_cache.dir
