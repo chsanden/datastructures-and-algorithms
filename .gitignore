@@ -1,10 +1,7 @@
-*.zip
-*.ZIP
-*.Zip
-*.clang-format
-*cmake-build-debug
-*.idea
-*.vscode
-*.DS_Store
-*/build
-*/cmake-build-debug
+# Ignore all
+*
+
+# But keep these files
+!*.cpp
+!*.h
+!*CMakeLists.txt
