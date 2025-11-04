@@ -4,3 +4,7 @@
 *.clang-format
 *cmake-build-debug
 *.idea
+*.vscode
+*.DS_Store
+*/build
+*/cmake-build-debug
