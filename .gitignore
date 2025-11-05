@@ -1,7 +1,3 @@
-# Ignore all
-*
-
-# But keep these files
-!*.cpp
-!*.h
-!*CMakeLists.txt
+# Ignore
+*.zip
+.git
