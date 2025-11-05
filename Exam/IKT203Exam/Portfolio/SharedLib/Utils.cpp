@@ -1,5 +1,6 @@
 #include "Utils.h"
 
+#include <ctime>
 #include <iostream>
 #include <limits>
 
@@ -76,3 +77,17 @@ int Utils::RemoveLine(TDoublyLinkedList &document, TStack &undoStack, TStack &re
     }
     return index;
 }
+
+int Utils::RandomInt(const int min, const int max)
+{
+    static bool isSeeded = false;
+    if (!isSeeded) {
+        std::srand(static_cast<unsigned>(std::time(nullptr)));      //<---- not the "best" random seeding available
+        isSeeded = true;                                            // but sufficient for this use case
+    }
+
+    if (max <= min)
+        return 0;
+
+    return min + rand() % (max - min + 1);                                      // <---- Limited randomness, but again
+}                                                                   // sufficient for this use case
