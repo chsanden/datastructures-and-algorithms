@@ -10,6 +10,7 @@ class Utils {
     static int Insert(TDoublyLinkedList &document, TStack &undoStack, TStack &redoStack, int index);
     static void PrintList(const TDoublyLinkedList &document);
     static int RemoveLine(TDoublyLinkedList &document, TStack &undoStack, TStack &redoStack, int index);
+    static int RandomInt(int, int);
 
 
 

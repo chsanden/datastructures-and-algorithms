@@ -1,7 +1,5 @@
 #include "FileReaderUtils.h"
 
-#include "FileReaderUtils.h"
-
 int GetRecordCount(const std::string& aHeaderLine)
 {
 	size_t recordPos = aHeaderLine.find("records:=");
