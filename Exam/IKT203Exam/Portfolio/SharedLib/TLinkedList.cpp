@@ -3,12 +3,15 @@
 
 TLinkedList::~TLinkedList()
 {
-    const Node* cur = head;
+    Node* cur = head;
     while (cur) {
-        const Node* next = cur->next;
+        Node* next = cur->next;
         delete cur;
         cur = next;
     }
+    head = nullptr;
+    tail = nullptr;
+    size = 0;
 }
 
 void TLinkedList::Append(const TPerson& person)
@@ -92,8 +95,7 @@ TPerson TLinkedList::GetAtIndex(const int index) const
 {
     if (index < 0 || index >= size) {
         std::cout << "Index out of range\n";
-        // return dummy
-        return {"N/A", "N/A", GUEST};
+        return {};
     }
 
     Node* cur = head;
@@ -147,6 +149,8 @@ TLinkedList::Node *TLinkedList::MergeList(Node *a, Node *b)
     return result;
 }
 
+/// Time complexity O(n log n) at all times
+/// Does NOT sort in place, so more memory is needed to complete
 TLinkedList::Node *TLinkedList::MergeSort(Node *head)
 {
     if (head == nullptr || head->next == nullptr)
@@ -160,8 +164,6 @@ TLinkedList::Node *TLinkedList::MergeSort(Node *head)
     front = MergeSort(front);
     back = MergeSort(back);
     return MergeList(front, back);
-
-
 }
 
 void TLinkedList::Sort()
@@ -176,12 +178,3 @@ void TLinkedList::Sort()
         cur = cur->next;
     }
 }
-
-
-
-
-
-
-
-
-

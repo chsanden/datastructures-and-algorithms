@@ -1,12 +1,11 @@
 #include "Utils.h"
-
+#include "TDoublyLinkedList.h"
+#include "TStack.h"
+#include "TPerson.h"
 #include <ctime>
 #include <iostream>
 #include <limits>
-
-#include "TDoublyLinkedList.h"
-#include "TStack.h"
-
+#include <numbers>
 
 int Utils::Choice()
 {
@@ -15,7 +14,6 @@ int Utils::Choice()
     int choice;
     std::cin >> choice;
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-    //std::cout << "\n=====================\n";
     return choice;
 }
 
@@ -89,5 +87,78 @@ int Utils::RandomInt(const int min, const int max)
     if (max <= min)
         return 0;
 
-    return min + rand() % (max - min + 1);                                      // <---- Limited randomness, but again
+    return min + rand() % (max - min + 1);                          // <---- Limited randomness, but again
 }                                                                   // sufficient for this use case
+
+bool Utils::CompareLastnames(const TPerson *a, const TPerson *b)
+{
+    if (a->cabinSize < b->cabinSize)
+        return true;
+    if (a->cabinSize > b->cabinSize)
+        return false;
+    return a->lastName < b->lastName;
+}
+
+
+int Utils::Partition(TPerson **arr, const int startIndex, const int endIndex)
+{
+    TPerson *pivot = arr[endIndex];
+    int i = startIndex - 1;
+
+    for (int j = startIndex; j < endIndex; j++) {
+        if (CompareLastnames(arr[j], pivot)) {
+            i++;
+            std::swap(arr[i], arr[j]);
+        }
+    }
+
+
+    std::swap(arr[i + 1], arr[endIndex]);
+    return i + 1;
+}
+
+/// Time complexity **on average** is O(n log n) but worst case it O(n^2)
+/// depending on where in the range the pivot lands -- If pivot is at either extreme
+/// the algorithm has to search through the entire list for every value it sorts -- n^2
+/// However it does sort in-place, meaning no extra memory is needed
+void Utils::QuickSort(TPerson** arr, const int low, const int high)
+{
+    if (low < high) {
+        int p = Partition(arr, low, high);
+        QuickSort(arr, low, p - 1);
+        QuickSort(arr, p + 1, high);
+    }
+}
+
+/// Time complexity of the binary search is O(log n)
+/// However the included fallback search is O(n)
+int Utils::BinarySearch(TPerson** arr, int p1, int p2, const std::string &target)
+{
+    const int origStart = p1;
+    const int origEnd = p2;
+
+
+    while (p1 <= p2) {
+        const int newP = (p1 + p2) / 2;
+        std::string currentFirst = arr[newP]->firstName;
+        std::string currentLast = arr[newP]->lastName;
+
+        if (target == currentFirst || target == currentLast)
+            return newP;
+
+        if (target > currentLast)
+            p1 = newP + 1;
+
+        else
+            p2 = newP - 1;
+    }
+
+    /// Extra to search for firstname in the event that no matches were found
+    /// Disregard this section if you're purely looking at the
+    /// binary search understanding and implementation
+    for (int i = origStart; i <= origEnd; i++) {
+        if (arr[i]->firstName == target)
+            return i;
+    }
+    return -1;
+}

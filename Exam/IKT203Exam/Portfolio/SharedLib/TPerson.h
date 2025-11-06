@@ -14,9 +14,10 @@ struct TPerson {
     std::string firstName;
     std::string lastName;
     ENumStatus status;
-    int cabinSize = Utils::RandomInt(1, 4);
+    int cabinSize{};
 
-    TPerson(std::string f, std::string l, ENumStatus s) : firstName(std::move(f)), lastName(std::move(l)), status(s){}
+    TPerson();
+    TPerson(std::string , std::string , ENumStatus);
     ~TPerson() = default;
 
     bool operator<(const TPerson& other) const
@@ -26,6 +27,7 @@ struct TPerson {
         // same last name → compare first name
         return firstName < other.firstName;
     }
+
 };
 
 
