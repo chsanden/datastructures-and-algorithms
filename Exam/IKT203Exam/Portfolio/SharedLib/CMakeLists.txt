@@ -6,7 +6,8 @@ add_library(SharedLib STATIC
         TPerson.cpp
         TPerson.h
         TLinkedList.cpp
-        TLinkedList.h)
+        TLinkedList.h
+        ../Assignment-03/TEmployee.h)
 
 # --- Step 2: Add Header Files to the Library ---
 
@@ -18,7 +19,7 @@ target_sources(SharedLib
     SharedLib.h
     TDoublyLinkedList.h
     TStack.h
-    TQueue.h
+        TTreeQueue.h
     Utils.h
     # Or add other shared files here
     PRIVATE
@@ -28,7 +29,7 @@ target_sources(SharedLib
     FileReaderUtils.cpp
     TDoublyLinkedList.cpp
     TStack.cpp
-    TQueue.cpp
+        TTreeQueue.cpp
     Utils.cpp
 )
 

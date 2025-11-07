@@ -5,7 +5,8 @@
 #include "TDoublyLinkedList.h"
 
 
-class TQueue {
+
+class TTreeQueue {
 private:
     std::string queue[MAX_SIZE];
     int head = 0;
@@ -13,8 +14,8 @@ private:
     int count = 0;
 
 public:
-    TQueue() = default;
-    ~TQueue() = default;
+    TTreeQueue() = default;
+    ~TTreeQueue() = default;
 
     void Enqueue(const std::string& text);
     std::string Dequeue();

@@ -40,8 +40,8 @@ int RunApp()
     TPerson* employeeAlphaSort[e.GetSize()];
     printline();
     for (int i = 0; i < e.GetSize(); i++) {
-        //std::cout << "[" << i << "] " << e.GetAtIndex(i).lastName << ", " << e.GetAtIndex(i).firstName
-       //<< " | status: Employee | cabin size: " << e.GetAtIndex(i).cabinSize << std::endl;
+        std::cout << "[" << i << "] " << e.GetAtIndex(i).lastName << ", " << e.GetAtIndex(i).firstName
+        << " | status: Employee | cabin size: " << e.GetAtIndex(i).cabinSize << std::endl;
        employeeAlphaSort[i] = new TPerson(e.GetAtIndex(i));
     }
     printline();
@@ -49,8 +49,8 @@ int RunApp()
     TPerson* guestAlphaSort[g.GetSize()];
     printline();
     for (int i = 0; i < g.GetSize(); i++) {
-        //std::cout << "[" << i << "] " << g.GetAtIndex(i).lastName << ", " << g.GetAtIndex(i).firstName
-       //<< " | status: Guest | cabin size: " << g.GetAtIndex(i).cabinSize << std::endl;
+        std::cout << "[" << i << "] " << g.GetAtIndex(i).lastName << ", " << g.GetAtIndex(i).firstName
+        << " | status: Guest | cabin size: " << g.GetAtIndex(i).cabinSize << std::endl;
         guestAlphaSort[i] = new TPerson(g.GetAtIndex(i));
     }
     printline();

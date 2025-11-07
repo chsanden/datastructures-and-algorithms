@@ -1,9 +1,9 @@
-#include "TQueue.h"
+#include "TTreeQueue.h"
 
 #include <stdexcept>
 
 
-void TQueue::Enqueue(const std::string& text)
+void TTreeQueue::Enqueue(const std::string& text)
 {
     if (IsFull())
         throw std::overflow_error("Queue Overflow");
@@ -12,7 +12,7 @@ void TQueue::Enqueue(const std::string& text)
     count++;
 }
 
-std::string TQueue::Dequeue()
+std::string TTreeQueue::Dequeue()
 {
     if (IsEmpty())
         throw std::underflow_error("Empty Queue");
@@ -22,24 +22,24 @@ std::string TQueue::Dequeue()
     return item;
 }
 
-std::string TQueue::Peek() const
+std::string TTreeQueue::Peek() const
 {
     if (IsEmpty())
         throw std::underflow_error("Empty Queue");
     return queue[head];
 }
 
-bool TQueue::IsEmpty() const
+bool TTreeQueue::IsEmpty() const
 {
     return count == 0;
 }
 
-bool TQueue::IsFull() const
+bool TTreeQueue::IsFull() const
 {
     return count == MAX_SIZE;
 }
 
-int TQueue::GetTail() const
+int TTreeQueue::GetTail() const
 {
     if (IsEmpty())
         throw std::underflow_error("Empty Queue");

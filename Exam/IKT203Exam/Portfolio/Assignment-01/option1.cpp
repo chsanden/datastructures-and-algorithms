@@ -4,12 +4,12 @@
 #include "option1.h"
 #include <iostream>
 #include "TDoublyLinkedList.h"
-#include "TQueue.h"
+#include "TTreeQueue.h"
 #include "TStack.h"
 #include "Utils.h"
 
 TDoublyLinkedList document;
-TQueue printQueue;
+TTreeQueue printQueue;
 TStack undoStack, redoStack;
 
 bool running = true;
