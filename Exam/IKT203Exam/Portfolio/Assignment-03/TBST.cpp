@@ -5,7 +5,7 @@
 #include "TTreeQueue.h"
 
 
-void TBST::destroy(Node *node)
+void TBST::destroy(BSTNode *node)
 {
     if (!node)
         return;
@@ -20,10 +20,10 @@ void TBST::Insert(const int key, TEmployee *data)
     root = insert(root, key, data);
 }
 
-Node* TBST::insert(Node* node, const int key, TEmployee *data)
+BSTNode* TBST::insert(BSTNode* node, const int key, TEmployee *data)
 {
     if (node == nullptr) {
-        auto* n = new Node{key, data, nullptr, nullptr};
+        auto* n = new BSTNode{key, data, nullptr, nullptr};
         return n;
     }
     if (key < node->key)
@@ -38,11 +38,11 @@ Node* TBST::insert(Node* node, const int key, TEmployee *data)
 
 TEmployee *TBST::Search(int key) const
 {
-    const Node* result = search(root, key);
+    const BSTNode* result = search(root, key);
     return result ? result->data : nullptr;
 }
 
-Node* TBST::search(Node* node, const int key)
+BSTNode* TBST::search(BSTNode* node, const int key)
 {
     if (node == nullptr)
         return nullptr;
@@ -59,7 +59,7 @@ void TBST::Delete(const int key)
     root = remove(root, key);
 }
 
-Node *TBST::remove(Node *node, const int key)
+BSTNode *TBST::remove(BSTNode *node, const int key)
 {
     if (node == nullptr)
         return nullptr;
@@ -76,21 +76,21 @@ Node *TBST::remove(Node *node, const int key)
         }
         // Right child only
         if (node->left == nullptr) {
-            Node* child = node->right;
+            BSTNode* child = node->right;
             delete node->data;
             delete node;
             return child;
         }
         // Left child only
         if (node->right == nullptr) {
-            Node* child = node->left;
+            BSTNode* child = node->left;
             delete node->data;
             delete node;
             return child;
         }
         // Two children
         else {
-            Node* minRight = findMin(node->right);
+            BSTNode* minRight = findMin(node->right);
             node->key = minRight->key;
             node->data = minRight->data;
             node->right = remove(minRight->right, minRight->key);
@@ -99,7 +99,7 @@ Node *TBST::remove(Node *node, const int key)
     return node;
 }
 
-Node* TBST::findMin(Node* node)
+BSTNode* TBST::findMin(BSTNode* node)
 {
     while (node && node->left)
         node = node->left;
@@ -108,7 +108,7 @@ Node* TBST::findMin(Node* node)
 
 /// Traversals
 /// Private helpers
-void TBST::preorder(const Node* node)
+void TBST::preorder(const BSTNode* node)
 {
     if (!node)
         return;
@@ -117,7 +117,7 @@ void TBST::preorder(const Node* node)
     preorder(node->right);
 }
 
-void TBST::inorder(const Node* node)
+void TBST::inorder(const BSTNode* node)
 {
     if (!node)
         return;
@@ -126,7 +126,7 @@ void TBST::inorder(const Node* node)
     inorder(node->right);
 }
 
-void TBST::postorder(const Node *node)
+void TBST::postorder(const BSTNode *node)
 {
     if (!node)
         return;
@@ -135,23 +135,22 @@ void TBST::postorder(const Node *node)
     std::cout << "[" << node->key << "] ";
 }
 
-void TBST::levelorder(const Node* node)
+void TBST::levelorder(const BSTNode* node)
 {
     if (!node)
         return;
 
-    TTreeQueue q;
-    q.Enqueue(const_cast<Node*>(node));
+    TTreeQueue<BSTNode> q;
+    q.Enqueue(const_cast<BSTNode*>(node));
 
     while (!q.IsEmpty()) {
-        const Node* cur = q.Dequeue();
+        const BSTNode* cur = q.Dequeue();
         std::cout << "[" << cur->key << "] ";
         if (cur->left)
             q.Enqueue(cur->left);
         if (cur->right)
             q.Enqueue(cur->right);
     }
-
 }
 
 void TBST::Inorder() const
@@ -177,6 +176,3 @@ void TBST::LevelOrder() const
     levelorder(root);
     std::cout << std::endl;
 }
-
-
-

@@ -10,7 +10,8 @@ add_executable(Assignment-03
         TBST.cpp
         TBST.h
         TEmployee.h
-        TTreeQueue.cpp
+        TAVL.cpp
+        TAVL.h
 )
 
 # Conditionally add the correct source file

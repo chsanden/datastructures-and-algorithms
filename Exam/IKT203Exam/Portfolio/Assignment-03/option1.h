@@ -8,6 +8,7 @@
 #include <TTreeQueue.h>
 #include <unordered_set>
 
+#include "TAVL.h"
 #include "TBST.h"
 #include "TEmployee.h"
 #include "Utils.h"
@@ -17,6 +18,7 @@
 /// all unique IDs
 inline std::unordered_set<int> usedIds;
 static TBST* bst;
+static TAVL* avl;
 
 int RunApp();
 
@@ -55,5 +57,7 @@ inline void pack(const std::string& line)
     std::cout << line << std::endl;
     printline();
 }
+
+
 
 #endif // OPTION1_H

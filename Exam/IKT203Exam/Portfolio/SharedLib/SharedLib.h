@@ -3,6 +3,7 @@
 #define SHARED_LIB_H
 #include <string>
 #include <functional>
+#include "../Assignment-03/TAVL.h"
 
 /// <summary>
 /// Delegate type for processing a name read from a file.
