@@ -101,6 +101,6 @@ typedef bool (*FSongRead)(
 void ReadSongsFromFile(const std::string& aFilename, FSongRead aOnSongRead);
 
 
-
+void PrintList(TLinkedList* list);
 
 #endif // SHARED_LIB_H
