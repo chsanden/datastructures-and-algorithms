@@ -1,14 +1,20 @@
 #include "option1.h"
 #include <iostream>
 #include "SharedLib.h"
+#include <algorithm>
 
-// Necessary declarations
 constexpr float INF = 1e9f;
+
+// Global graph storage and lookup table used by the ReadGraph callbacks.
+// These are populated automatically when readGraphFromFile(...) is executed.
 Graph g;
 std::unordered_map<std::string, int> nameToIndex;
-std::string filename = R"(C:\Users\csand\IKT203\Exam\IKT203Exam\DATA\network_graph.txt)"; // Local path to MY graph file
+std::string filename = "DATA/network_graph.txt"; // Remember to set working directory for this path to work
 
 //////////////////////////////// Callbacks ////////////////////////////////
+// Callback: called once for each node read from network_graph.txt.
+// Responsible for registering the vertex in the graph and recording its index.
+
 bool onNodeRead(const int aIndex, const int aTotalCount, const std::string& aNode)
 {
     const int idx = g.AddVertex(aNode);
@@ -16,6 +22,8 @@ bool onNodeRead(const int aIndex, const int aTotalCount, const std::string& aNod
     return true;
 }
 
+// Callback: called for each edge (connection) read from the file.
+// Translates node names into vertex indices and adds an undirected weighted edge.
 bool onEdgeRead(const int aIndex, const int aTotalCount, const std::string& aFromNode, const std::string& aToNode, const float aWeight)
 {
     const int fromIdx = nameToIndex[aFromNode];
@@ -26,6 +34,10 @@ bool onEdgeRead(const int aIndex, const int aTotalCount, const std::string& aFro
 }
 
 //////////////////////////////// Dijkstra algorithm ////////////////////////////////
+// Computes the shortest path between src and dst using Dijkstra's algorithm.
+// Uses the custom MinHeap class as the priority queue.
+// Output: 'outPath' contains vertex indices from src -> dst in order.
+// Returns INF if no path exists.
 float Dijkstra(const Graph& graph, int src, int dst, std::vector<int>& outPath)
 {
     const int n = graph.GetVertexCount();
@@ -39,10 +51,12 @@ float Dijkstra(const Graph& graph, int src, int dst, std::vector<int>& outPath)
     MinHeap heap;
     heap.Push(src, 0.0f);
 
+    // Pop the next closest unvisited vertex. Old entries with outdated distances
+    // are skipped via the 'visited' array (lazy deletion).
     while (!heap.isEmpty()) {
         HeapNode* node = heap.Pop();
         const int u = node->vertex;
-        float d = node->distance;
+        // float d = node->distance;    not needed
         delete node;
 
         if (visited[u])
@@ -76,6 +90,8 @@ float Dijkstra(const Graph& graph, int src, int dst, std::vector<int>& outPath)
 
 //////////////////////////////// Class logic ////////////////////////////////
 // Graph
+// Clean up all dynamically allocated vertices and edges.
+// Graph owns all TVertex* and TEdge*.
 Graph::~Graph()
 {
     for (TVertex* v : vertices) {
@@ -124,6 +140,8 @@ const std::vector<TEdge*>& Graph::GetEdges(const int index) const
 }
 
 // Heap
+// Min-heap storing (vertex, distance) pairs.
+// Used by Dijkstra as a priority queue.
 MinHeap::~MinHeap()
 {
     for (HeapNode* n : data)
@@ -188,14 +206,10 @@ void MinHeap::HeapDown(int idx)
 }
 
 
-
-
-
-
-
-
-
-
+// Entry point for Assignment 04 Option 1.
+// Loads the network graph from file, prints node list,
+// prompts the user for source and destination,
+// and runs Dijkstra to find the lowest-latency path.
 int RunApp() {
 
     readGraphFromFile(filename, onNodeRead, onEdgeRead);
@@ -211,7 +225,6 @@ int RunApp() {
         }
     }
     */
-
     /* Debug heap test
     pack("Heap");
     MinHeap test;

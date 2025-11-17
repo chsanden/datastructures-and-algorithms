@@ -56,7 +56,7 @@ public:
 
 // Callbacks & funcs
 bool onNodeRead(int aIndex, int aTotalCount, const std::string& aNode);
-bool onEdgeRead(int aIndex, int aTotalCount, std::string& aFromNode, std::string& aToNode, float aWeight);
+bool onEdgeRead(int aIndex, int aTotalCount, const std::string& aFromNode, const std::string& aToNode, float aWeight);
 
 float Dijkstra(const Graph& graph, int src, int dst, std::vector<int>& outPath);
 
