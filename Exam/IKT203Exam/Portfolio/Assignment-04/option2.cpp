@@ -27,7 +27,7 @@ static bool EdgeReadCallback(const int aIndex, const int aTotalCount, const std:
 	return true;
 }
 
-
+/*
 int RunApp()
 {
 
@@ -44,4 +44,4 @@ int RunApp()
 	std::cout << "\nFinished reading graph." << std::endl;
 
 	return 0;
-}
+}*/

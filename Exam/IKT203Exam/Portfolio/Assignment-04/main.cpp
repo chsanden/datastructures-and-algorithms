@@ -28,16 +28,18 @@ To force an update (e.g., in Visual Studio):
 
 #include <iostream>
 #include <string_view>
+#include "option1.h"
 static constexpr std::string_view AssignmentName = "Category 4: Graphs & Dijkstra's Algorithm";
-
-#if ASSIGNMENT_04_OPTION == 1
 static constexpr std::string_view AssignmentOption = "Option 1 (Standard): Data Center Network Monitor.";
+
+/*
+#if ASSIGNMENT_04_OPTION == 1
 #include "option1.h"
 #elif ASSIGNMENT_04_OPTION == 2
 static constexpr std::string_view AssignmentOption = "Option 2 (Advanced): Inter-city Logistics Router.";
 #include "option2.h"
 #endif
-
+*/
 
 int main(int argc, char* argv[])
 {
