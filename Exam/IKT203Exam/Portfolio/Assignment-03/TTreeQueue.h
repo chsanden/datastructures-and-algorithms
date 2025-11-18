@@ -3,10 +3,10 @@
 #define MAX_SIZE 200
 
 #include <stdexcept>
-
 #include "TBST.h"
 
-
+// Fixed-size circular queue used by the BST and AVL level-order traversals.
+// Stores raw pointers to tree nodes (T*). Does not own the nodes.
 template <typename T>
 struct TTreeQueue {
 
@@ -22,7 +22,7 @@ struct TTreeQueue {
     void Enqueue(T* n)
     {
         if (n == nullptr)
-            return;
+            return; // ignore null pointers, nothing to enqueue
         if (IsFull())
             throw std::overflow_error("Queue Overflow");
         queue[tail] = n;

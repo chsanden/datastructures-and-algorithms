@@ -1,7 +1,5 @@
 #include "TBST.h"
-
 #include <iostream>
-
 #include "TTreeQueue.h"
 
 
@@ -11,10 +9,15 @@ void TBST::destroy(BSTNode *node)
         return;
     destroy(node->left);
     destroy(node->right);
+    // TBST owns the TEmployee* stored in each node, so delete it here.
     delete node->data;
     delete node;
 }
 
+///<summary> Insert node </summary
+///<param name="key"> Node key value (int) </param>
+///<param name="data"> Employee data (TEmployee) </param>
+/// <returns> None </returns>
 void TBST::Insert(const int key, TEmployee *data)
 {
     root = insert(root, key, data);
@@ -30,12 +33,19 @@ BSTNode* TBST::insert(BSTNode* node, const int key, TEmployee *data)
         node->left = insert(node->left, key, data);
     else if (key > node->key)
         node->right = insert(node->right, key, data);
-    else
-        std::cout << "Error with node insertion" << std::endl;
-
+    else {
+        // Duplicate key: do not modify the existing node.
+        // 'data' was allocated by the caller, so we must delete it here
+        // to avoid a memory leak.
+        std::cout << "Duplicate key [" << key << "], ignoring insert." << std::endl;
+        delete data;
+    }
     return node;
 }
 
+///<summary> Search for node </summary
+///<param name="key"> Node key value (int) </param>
+/// <returns> TEmployee </returns>
 TEmployee *TBST::Search(int key) const
 {
     const BSTNode* result = search(root, key);
@@ -54,6 +64,9 @@ BSTNode* TBST::search(BSTNode* node, const int key)
         return search(node->right, key);
 }
 
+///<summary> Delete node </summary
+///<param name="key"> Node key value (int) </param>
+/// <returns> None </returns>
 void TBST::Delete(const int key)
 {
     root = remove(root, key);
@@ -88,7 +101,10 @@ BSTNode *TBST::remove(BSTNode *node, const int key)
             delete node;
             return child;
         }
-        // Two children
+        // Two children:
+        // 1) Find the smallest node in the right subtree (inorder successor)
+        // 2) Copy its key + data into the current node
+        // 3) Remove the successor node from the right subtree
         else {
             BSTNode* minRight = findMin(node->right);
             node->key = minRight->key;
@@ -106,8 +122,8 @@ BSTNode* TBST::findMin(BSTNode* node)
     return node;
 }
 
-/// Traversals
-/// Private helpers
+// Traversals
+// Private helpers
 void TBST::preorder(const BSTNode* node)
 {
     if (!node)
@@ -153,24 +169,32 @@ void TBST::levelorder(const BSTNode* node)
     }
 }
 
+///<summary> Inorder sorting </summary
+/// <returns> None </returns>
 void TBST::Inorder() const
 {
     inorder(root);
     std::cout << std::endl;
 }
 
+///<summary> Preorder sorting </summary
+/// <returns> None </returns>
 void TBST::Preorder() const
 {
     preorder(root);
     std::cout << std::endl;
 }
 
+///<summary> Postorder sorting </summary
+/// <returns> None </returns>
 void TBST::Postorder() const
 {
     postorder(root);
     std::cout << std::endl;
 }
 
+///<summary> LevelOrder sorting </summary
+/// <returns> None </returns>
 void TBST::LevelOrder() const
 {
     levelorder(root);

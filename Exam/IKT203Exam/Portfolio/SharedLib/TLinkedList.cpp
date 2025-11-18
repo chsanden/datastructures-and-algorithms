@@ -149,8 +149,8 @@ TLinkedList::Node *TLinkedList::MergeList(Node *a, Node *b)
     return result;
 }
 
-/// Time complexity O(n log n) at all times
-/// Does NOT sort in place, so more memory is needed to complete
+// Time complexity O(n log n) at all times
+// Does NOT sort in place, so more memory is needed to complete
 TLinkedList::Node *TLinkedList::MergeSort(Node *head)
 {
     if (head == nullptr || head->next == nullptr)
@@ -166,6 +166,8 @@ TLinkedList::Node *TLinkedList::MergeSort(Node *head)
     return MergeList(front, back);
 }
 
+// Stable merge sort on the linked list.
+// Time complexity: O(n log n), requires extra pointers but no extra arrays.
 void TLinkedList::Sort()
 {
     this->head = MergeSort(head);

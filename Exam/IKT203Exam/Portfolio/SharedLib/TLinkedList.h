@@ -3,12 +3,15 @@
 
 #include "TPerson.h"
 
+// Singly linked list of TPerson, used for the guest and employee manifests.
+// Owns all its Node objects and frees them in the destructor.
+// Supports append, prepend, insert, remove, indexed access, and merge-sort.
 class TLinkedList {
 
 
     private:
     struct Node {
-        TPerson person;
+        TPerson person;  // stored by value
         Node* next;
         explicit Node(const TPerson& p) : person(p), next(nullptr) {}
 

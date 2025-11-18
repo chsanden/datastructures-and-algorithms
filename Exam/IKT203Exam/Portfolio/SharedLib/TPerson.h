@@ -9,7 +9,9 @@ enum ENumStatus {
     EMPLOYEE
 };
 
-
+// Represents one person on the cruise ship.
+// - 'status' tells us if they're a GUEST or EMPLOYEE
+// - 'cabinSize' is random in [1, 4] and used for cabin grouping
 struct TPerson {
     std::string firstName;
     std::string lastName;
@@ -20,6 +22,8 @@ struct TPerson {
     TPerson(std::string , std::string , ENumStatus);
     ~TPerson() = default;
 
+    // Comparison for alphabetical sorting:
+    // primary key: lastName, secondary key: firstName.
     bool operator<(const TPerson& other) const
     {
         if (lastName < other.lastName) return true;

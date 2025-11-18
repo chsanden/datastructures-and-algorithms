@@ -1,10 +1,6 @@
 #include "TAVL.h"
-
-#include <ios>
 #include <iostream>
 #include <unordered_set>
-#include <bits/ios_base.h>
-
 #include "TTreeQueue.h"
 #include "Utils.h"
 
@@ -57,7 +53,10 @@ AVLNode *TAVL::rotateLeft(AVLNode *x)
     return y;
 }
 
-// Comment out std::cout lines for no rotation output lines
+// Recursive AVL insert:
+// - Insert key as in a normal BST.
+// - Update node height.
+// - Compute balance factor and apply the appropriate rotation if unbalanced.
 AVLNode *TAVL::insert(AVLNode *n, const int key)
 {
     if (!n)
@@ -74,23 +73,25 @@ AVLNode *TAVL::insert(AVLNode *n, const int key)
 
     if (balance > 1 && key < n->left->key)
     {
-        std::cout << "L-L rotation on [" << n->key << "]" << std::endl;
+        //std::cout << "L-L rotation on [" << n->key << "]" << std::endl; <--- uncomment for terminal output of rotations
         return rotateRight(n);
     }
 
     if (balance < -1 && key > n->right->key)
     {
-        std::cout << "R-R rotation on [" << n->key << "]" << std::endl;
+        //std::cout << "R-R rotation on [" << n->key << "]" << std::endl; <--- uncomment for terminal output of rotations
         return rotateLeft(n);
     }
 
     if (balance > 1 && key > n->left->key)
-    {   std::cout << "L-R rotation on [" << n->key << "]" << std::endl;
+    {
+        //std::cout << "L-R rotation on [" << n->key << "]" << std::endl; <--- uncomment for terminal output of rotations
         n->left = rotateLeft(n->left);
         return rotateRight(n);
     }
     if (balance < -1 && key < n->right->key)
-    {   std::cout << "R-L rotation on [" << n->key << "]" << std::endl;
+    {
+        //std::cout << "R-L rotation on [" << n->key << "]" << std::endl; <--- uncomment for terminal output of rotations
         n->right = rotateRight(n->right);
         return rotateLeft(n);
     }
@@ -144,11 +145,17 @@ void TAVL::levelorder(const AVLNode* node)
 }
 
 // Public functions
+///<summary> Insert node </summary
+///<param name="key"> Node key value (int) </param>
+/// <returns> None </returns>
 void TAVL::Insert(const int key)
 {
     root = insert(root, key);
 }
 
+///<summary> Inorder callback </summary
+///<param name=""> AVLNode *node </param>
+/// <returns> Bool </returns>
 bool TAVL::Inorder(const AVLNode *node)
 {
     if (!node)
@@ -158,6 +165,9 @@ bool TAVL::Inorder(const AVLNode *node)
     return true;
 }
 
+///<summary> Postorder callback </summary
+///<param name=""> AVLNode *node </param>
+/// <returns> Bool </returns>
 bool TAVL::Postorder(const AVLNode *node)
 {
     if (!node)
@@ -167,6 +177,9 @@ bool TAVL::Postorder(const AVLNode *node)
     return true;
 }
 
+///<summary> Preorder callback </summary
+///<param name=""> AVLNode *node </param>
+/// <returns> Bool </returns>
 bool TAVL::Preorder(const AVLNode *node)
 {
     if (!node)
@@ -176,6 +189,9 @@ bool TAVL::Preorder(const AVLNode *node)
     return true;
 }
 
+///<summary> LevelOrder callback </summary
+///<param name=""> AVLNode *node </param>
+/// <returns> Bool </returns>
 bool TAVL::LevelOrder(const AVLNode *node)
 {
     if (!node)
@@ -185,6 +201,9 @@ bool TAVL::LevelOrder(const AVLNode *node)
     return true;
 }
 
+///<summary> Prints the desired sorting order </summary
+///<param name="cb"> Callback for the desired ordering algorithm (e.g. PrintOrder(LevelOrder) will print the Level Order algorithm to the terminal)</param>
+/// <returns>None</returns>
 void TAVL::PrintOrder(FOrderTraversal cb)
 {
     if (!cb)
@@ -192,6 +211,8 @@ void TAVL::PrintOrder(FOrderTraversal cb)
     cb(root);
 }
 
+// Helper to build an AVL tree with 'count' unique random keys
+// in the range [minRange, maxRange]. Used only for demonstration in RunApp()
 ///<summary> Populates AVL tree </summary
 ///<param name="avl"> The AVL tree to be populated</param>
 ///<param name"count">How many elements to be populated into the tree</param>
@@ -205,7 +226,7 @@ void TAVL::Populate(TAVL* avl, const int count, const int minRange, const int ma
         int val = Utils::RandomInt(minRange, maxRange);
         while (AVLset.count(val))
             val = Utils::RandomInt(minRange, maxRange);
-        std::cout << "Inserting [" << val << "]" << std::endl;
+        //std::cout << "Inserting [" << val << "]" << std::endl; <----- Uncomment for terminal output of insertions
         avl->Insert(val);
         AVLset.insert(val);
     }

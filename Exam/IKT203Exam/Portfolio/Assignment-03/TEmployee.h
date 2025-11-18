@@ -3,7 +3,8 @@
 #include <string>
 #include <utility>
 
-
+// Simple employee record used in Category 3.
+// 'id' is set later by IdGenerator and used as the BST key.
 struct TEmployee {
     std::string firstName;
     std::string lastName;

@@ -1,4 +1,6 @@
-// option1.h : Option 1 (Standard): Console Text Editor.
+// Option 1 (Standard): Cruise Ship Manifest.
+// Uses linked lists, merge sort, quick sort, and binary search
+// to manage guest and employee manifests from random_names.txt.
 
 #pragma once
 
@@ -7,8 +9,13 @@
 #include "TLinkedList.h"
 #include "TPerson.h"
 
+// Global lists and counters used across the assignment:
+// - 'e' stores EMPLOYEE records
+// - 'g' stores GUEST records
+// - guestCount / employCount track how many were loaded
 inline TLinkedList g, e;
-inline int guestCount, employCount = 0;
+inline int guestCount = 0;
+inline int employCount = 0;
 
 
 
@@ -42,9 +49,13 @@ static bool NameReadCallback(const int aIndex, const int aTotalCount, const std:
 }
 */
 
-// *Inspired* by the provided NameReadCallback given above
+// Callback used by readNamesFromFile.
+// - Creates a TPerson with status (EMPLOYEE or GUEST)
+// - First 1500 entries are EMPLOYEE, the rest are GUEST
+// - Appends each person to the appropriate linked list and updates counters
 static bool onNameRead(const int aIndex, const int aTotalCount, const std::string& aFirstName, const std::string& aLastName)
 {
+    // Determine status based on index: first 1500 are employees, rest are guests.
     const ENumStatus status = (aIndex < 1500) ? EMPLOYEE : GUEST;
 
     const TPerson p(aFirstName, aLastName, status);
@@ -64,7 +75,10 @@ static bool onNameRead(const int aIndex, const int aTotalCount, const std::strin
     return true;
 }
 
-
+// Binary-search helper:
+// - Performs binary search on a sorted array of TPerson* (alphabetical by last name)
+// - 'target' is the surname entered by the user
+// - Expands left/right from the first match to find and print all matches
 inline void SearchAndPrint(TPerson** targetArray, int arraySize, const std::string& target)
 {
     int index = Utils::BinarySearch(targetArray, 0, arraySize - 1, target);
@@ -77,10 +91,12 @@ inline void SearchAndPrint(TPerson** targetArray, int arraySize, const std::stri
     int left = index - 1;
     int right = index + 1;
 
+    // Move left while neighbouring entries share the same first or last name
     while (left >= 0 && (targetArray[left]->firstName == target || targetArray[left]->lastName == target)) {
         --left;
     }
 
+    // Move right while neighbouring entries share the same first or last name
     while (right < arraySize && (targetArray[right]->firstName == target || targetArray[right]->lastName == target)) {
         ++right;
     }

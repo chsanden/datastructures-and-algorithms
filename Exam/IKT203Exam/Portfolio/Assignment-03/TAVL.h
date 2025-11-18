@@ -1,8 +1,8 @@
 #ifndef IKT203_COURSE_ASSIGNMENTS_TAVL_H
 #define IKT203_COURSE_ASSIGNMENTS_TAVL_H
-#include <unordered_set>
 
-
+// Node used in the AVL tree.
+// Stores only an integer key and height (no TEmployee data).
 struct AVLNode {
         int key;
         AVLNode* left;
@@ -14,6 +14,8 @@ struct AVLNode {
 
 typedef bool (*FOrderTraversal)(const AVLNode* AVLNode);
 
+// Self-balancing AVL tree used to demonstrate rotations and traversals.
+// Only stores integer keys; no payload data is required for this assignment.
 class TAVL {
 private:
     AVLNode* root;

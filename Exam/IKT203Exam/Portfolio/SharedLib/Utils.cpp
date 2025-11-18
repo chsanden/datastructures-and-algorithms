@@ -90,6 +90,9 @@ int Utils::RandomInt(const int min, const int max)
     return min + rand() % (max - min + 1);                          // <---- Limited randomness, but again
 }                                                                   // sufficient for this use case
 
+// Comparison used for cabin grouping (QuickSort):
+// 1) cabinSize ascending
+// 2) lastName alphabetical
 bool Utils::CompareLastnames(const TPerson *a, const TPerson *b)
 {
     if (a->cabinSize < b->cabinSize)
@@ -117,10 +120,10 @@ int Utils::Partition(TPerson **arr, const int startIndex, const int endIndex)
     return i + 1;
 }
 
-/// Time complexity **on average** is O(n log n) but worst case it O(n^2)
-/// depending on where in the range the pivot lands -- If pivot is at either extreme
-/// the algorithm has to search through the entire list for every value it sorts -- n^2
-/// However it does sort in-place, meaning no extra memory is needed
+// QuickSort on an array of TPerson* using CompareLastnames:
+// - Average time: O(n log n)
+// - Worst case: O(n^2) if pivot choices are bad
+// - Sorts in-place (no extra arrays)
 void Utils::QuickSort(TPerson** arr, const int low, const int high)
 {
     if (low < high) {
@@ -130,8 +133,8 @@ void Utils::QuickSort(TPerson** arr, const int low, const int high)
     }
 }
 
-/// Time complexity of the binary search is O(log n)
-/// However the included fallback search is O(n)
+// Binary search on an alphabetically sorted array of TPerson* (by lastName, then firstName).
+// Primary search key: surname. If no surname match is found, falls back to linear scan on firstName.
 int Utils::BinarySearch(TPerson** arr, int p1, int p2, const std::string &target)
 {
     const int origStart = p1;
@@ -153,9 +156,7 @@ int Utils::BinarySearch(TPerson** arr, int p1, int p2, const std::string &target
             p2 = newP - 1;
     }
 
-    /// Extra to search for firstname in the event that no matches were found
-    /// Disregard this section if you're purely looking at the
-    /// binary search understanding and implementation
+    // Fallback linear scan for first names if no last name match
     for (int i = origStart; i <= origEnd; i++) {
         if (arr[i]->firstName == target)
             return i;

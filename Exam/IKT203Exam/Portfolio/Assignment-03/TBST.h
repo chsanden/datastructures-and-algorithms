@@ -2,13 +2,19 @@
 #define IKT203_COURSE_ASSIGNMENTS_TBST_H
 #include "TEmployee.h"
 
+// Node in the Binary Search Tree.
+// Owns a single TEmployee* which is deleted by TBST::destroy/remove.
 struct BSTNode {
-    int key;
-    TEmployee* data;
+    int key;                // employee ID
+    TEmployee* data;        // employee record
     BSTNode* left;
     BSTNode* right;
 };
 
+// Standard Binary Search Tree for TEmployee* keyed by employee ID.
+// Responsibilities:
+// - Owns all TEmployee objects it contains.
+// - Provides insert, search, delete, and four traversal methods.
 class TBST {
     private:
     BSTNode* root;
