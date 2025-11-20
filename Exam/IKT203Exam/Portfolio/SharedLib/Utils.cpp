@@ -5,11 +5,11 @@
 #include <ctime>
 #include <iostream>
 #include <limits>
-#include <numbers>
 
+// Displays the main menu and reads user choice.
 int Utils::Choice()
 {
-    std::cout << "========\n1. Add line\n2. Remove line\n3. Print current document\n4. Print queue\n5. Undo\n6. Redo\n0. Exit"
+    std::cout << "========\n1. Add line\n2. Remove line\n3. View current1 document\n4. Print queue\n5. Process print job\n6. Undo\n7. Redo\n0. Exit"
                  "\n\nChoice:  ";
     int choice;
     std::cin >> choice;
@@ -17,6 +17,9 @@ int Utils::Choice()
     return choice;
 }
 
+// Inserts a new line into the document.
+// Records the action into the undo stack.
+// 'index' determines insert location; defaults to end of document.
 int Utils::Insert(TDoublyLinkedList &document, TStack &undoStack, TStack &redoStack, int index)
 {
         for (int i = 0; i < document.GetSize(); i++) {
@@ -58,6 +61,8 @@ void Utils::PrintList(const TDoublyLinkedList &document)
     std::cout << "\n\n";
 }
 
+// Removes a line chosen by the user.
+// Action is pushed to undo stack for reversibility.
 int Utils::RemoveLine(TDoublyLinkedList &document, TStack &undoStack, TStack &redoStack, int index)
 {
     std::cout << "Enter the number of the line you want to remove" <<std::endl;

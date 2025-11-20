@@ -1,4 +1,7 @@
-// option1.h : Option 1 (Standard): Console Text Editor.
+// Option 1: Console Text Editor
+// Uses a doubly linked list for storing document lines,
+// two stacks for undo/redo operations,
+// and a queue for print-job management.
 
 #pragma once
 

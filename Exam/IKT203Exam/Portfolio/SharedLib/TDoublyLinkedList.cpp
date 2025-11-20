@@ -3,7 +3,19 @@
 #include "SharedLib.h"
 
 
+TDoublyLinkedList::~TDoublyLinkedList()
+{
+    const Node* cur  = head;
+    while (cur) {
+        const Node* next = cur->GetNext();
+        delete cur;
+        cur = next;
+    }
+    head  = tail = nullptr;
+    size  = 0;
+}
 
+// Append a new line at the end of the list.
 void TDoublyLinkedList::Append(const std::string& line)
 {
     auto* newNode = new Node(line);
@@ -17,6 +29,7 @@ void TDoublyLinkedList::Append(const std::string& line)
     size++;
 }
 
+// Insert a new line at the beginning.
 void TDoublyLinkedList::Prepend(const std::string& line)
 {
     auto* newNode = new Node(line);
@@ -43,6 +56,7 @@ TDoublyLinkedList::Node* TDoublyLinkedList::NavigateToNode(const int index) cons
     return node;
 }
 
+// Removes the node at the given index and updates head/tail if needed.
 void TDoublyLinkedList::Remove(const int index)
 {
     auto* node = NavigateToNode(index);
