@@ -21,8 +21,6 @@ endif()
 # The order matters here: we add LibExample first so that its library is
 # defined before the executables that need to link to it.
 
-add_subdirectory(LibExample)
-add_subdirectory(Submissions)
 add_subdirectory(Portfolio)
 
 # --- End of File ---

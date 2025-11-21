@@ -1,6 +1,8 @@
 #include "option1.h"
 #include <limits>
 
+#include "SharedLib.h"
+
 // Entry point for Category 3, Option 1.
 // Demonstrates:
 // 1) Building a BST of 200 employees from DATA/random_names.txt
