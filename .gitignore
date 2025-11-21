@@ -1,6 +1,2 @@
+# Ignore
 *.zip
-*.ZIP
-*.Zip
-*.clang-format
-*cmake-build-debug
-*.idea
